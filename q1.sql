@@ -75,7 +75,7 @@ FROM
 	WHERE Actors.id = ActsIn.aid
 	AND Movies.id = ActsIn.mid
 	AND Movies.year BETWEEN '2015' AND '2022'
-	GROUP BY Actors.name) AS temp
+	GROUP BY Actors.name) AS Temp
 WHERE movie_count > 1
 
 
@@ -84,6 +84,12 @@ SELECT Movies.name, Movies.rating, Movies.year
 FROM Movies 
 INNER JOIN ActsIn ON Movies.id = ActsIn.mid 
 WHERE NOT (ActsIn.aid = 1 or ActsIn.aid = 2);
+
+SELECT Movies.name, Movies.rating, Movies.year 
+FROM Movies, Actors, ActsIn
+WHERE Actors.id = ActsIn.aid
+AND Movies.id = ActsIn.mid
+AND NOT (Actors.name = 'Kit Harrington' OR Actors.name = 'Emilia Clark');
 
 
 -- 7
