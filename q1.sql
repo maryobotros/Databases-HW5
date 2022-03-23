@@ -68,6 +68,16 @@ WHERE Movies.year BETWEEN '2015' AND '2022'
 GROUP BY Actors.name
 HAVING COUNT(*) >1;
 
+SELECT name 
+FROM
+	(SELECT Actors.name AS name, COUNT(mid) AS movie_count
+	FROM Actors, ActsIn, Movies
+	WHERE Actors.id = ActsIn.aid
+	AND Movies.id = ActsIn.mid
+	AND Movies.year BETWEEN '2015' AND '2022'
+	GROUP BY Actors.name) AS temp
+WHERE movie_count > 1
+
 
 -- 6
 SELECT Movies.name, Movies.rating, Movies.year 
