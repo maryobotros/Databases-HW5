@@ -11,7 +11,8 @@ SELECT * FROM Movies;
 -- 1
 SELECT name, rating, year 
 FROM Movies 
-WHERE gross < budget AND year BETWEEEN ‘2000’ AND ‘2022’
+WHERE gross < budget 
+AND year BETWEEEN ‘2000’ AND ‘2022’
 ORDER BY year DESC;
 
 
@@ -24,7 +25,7 @@ WHERE Movies.year BETWEEN '2000' AND '2022'
 GROUP BY Actors.name;
 ORDER BY Actors.name;
 
-SELECT Actors.name, COUNT(ActsIn.aid)
+SELECT Actors.name, COUNT(ActsIn.mid)
 FROM Actors, ActsIn, Movies
 WHERE Actors.id = ActsIn.aid
 AND Movies.id = ActsIn.mid
@@ -52,7 +53,7 @@ SELECT COUNT(*)
 FROM ActsIn 
 WHERE mid = 5;
 
-SELECT COUNT(mid) AS Number_of_actors_in_Infinity_War
+SELECT COUNT(aid) AS Number_of_actors_in_Infinity_War
 FROM Actors, ActsIn, Movies
 WHERE Actors.id = ActsIn.aid
 AND Movies.id = ActsIn.mid
