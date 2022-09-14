@@ -94,7 +94,7 @@ AND NOT (Actors.name = 'Kit Harrington' OR Actors.name = 'Emilia Clark');
 
 
 -- 7
-SELECT Actors.name, COUNT(ActsIn.aid)
+SELECT Actors.name, COUNT(ActsIn.mid)
 FROM Actors 
 INNER JOIN ActsIn ON Actors.id = ActsIn.aid
 INNER JOIN Movies ON Actsin.mid = Movies.id
@@ -104,12 +104,14 @@ HAVING COUNT(*) = 2; -- FIXME (need a way to make it show actors with the maximu
 
 
 -- 8
-SELECT Actors.name, Actors.age 
+SELECT Actors.name, age 
 FROM Actors 
-INNER JOIN ActsIn ON Actors.id = ActsIn.aid 
-INNER JOIN Movies ON Movies.id = ActsIn.mid 
-WHERE Movies.gross > 1000000000 
-ORDER BY Age ASC LIMIT 1;
+WHERE age = ( 
+	SELECT MIN(Actors.age)
+	FROM Movies, Actors, ActsIn
+	WHERE ActsIn.mid = Movies.id
+	AND ActsIn.aid = Actors.id
+	AND Movies.gross >= 1000000000);
 
 
 
